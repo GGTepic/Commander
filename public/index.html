@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marcador del Torneo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1><img src="imagenes/logo.png" alt="Logo" width="400" style="max-width:80%" /></h1>
+
+  <table border="1">
+    <thead><tr><th>Jugador</th><th>Puntos</th><th>Partidas</th></tr></thead>
+    <tbody id="tabla-jugadores"></tbody>
+  </table>
+
+  <script>
+    async function cargarMarcador() {
+      const res = await fetch('/api/marcador');
+      if (!res.ok) return alert('Error al cargar marcador');
+      const datos = await res.json();
+      const tabla = document.getElementById('tabla-jugadores');
+      tabla.innerHTML = '';
+      for (const jugador in datos) {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `<td>${jugador}</td><td>${datos[jugador].puntos}</td><td>${datos[jugador].partidas}</td>`;
+        tabla.appendChild(fila);
+      }
+    }
+    window.onload = cargarMarcador;
+  </script>
+  <nav>
+        <a href="torneos.html">📜 Historial de Torneos</a>
+  </nav>
+</body>
+</html>

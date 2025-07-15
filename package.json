@@ -1,0 +1,12 @@
+{
+  "name": "torneo-mt",
+  "version": "1.0.0",
+  "description": "Marcador de torneo Magic the Gathering con backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

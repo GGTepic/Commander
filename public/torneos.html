@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Historial de Torneos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Historial de Torneos</h1>
+  <div id="contenedor-torneos"></div>
+
+  <script>
+    async function cargarHistorial() {
+      const res = await fetch('/api/historial');
+      const historial = await res.json();
+      const contenedor = document.getElementById('contenedor-torneos');
+      if (historial.length === 0) {
+        contenedor.innerHTML = '<p>No hay torneos registrados aún.</p>';
+        return;
+      }
+
+      historial.forEach((torneo, index) => {
+        const div = document.createElement('div');
+        div.innerHTML = `<h3>Torneo ${index + 1} - ${new Date(torneo.fecha).toLocaleString()}</h3>
+        <table border="1">
+          <thead><tr><th>Jugador</th><th>Puntos</th><th>Partidas</th></tr></thead>
+          <tbody>
+            ${Object.entries(torneo.marcador).map(([jug, val]) =>
+              `<tr><td>${jug}</td><td>${val.puntos}</td><td>${val.partidas}</td></tr>`).join('')}
+          </tbody>
+        </table>`;
+        contenedor.appendChild(div);
+      });
+    }
+
+    window.onload = cargarHistorial;
+  </script>
+   <a href="index.html">📜 Clasificacion Torneo Actual</a>
+</body>
+</html>

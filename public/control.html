@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control del Torneo de Magic</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Control del Torneo de Magic</h1>
+
+  <section>
+    <h2>Tabla de Puntuación (tiempo real)</h2>
+    <table border="1">
+      <thead>
+        <tr><th>Jugador</th><th>Puntos</th><th>Partidas</th></tr>
+      </thead>
+      <tbody id="tabla-jugadores"></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Alta de Jugadores</h2>
+    <input type="text" id="nuevo-jugador" placeholder="Nombre del jugador">
+    <button onclick="agregarJugador()">Agregar jugador</button>
+  </section>
+
+  <section>
+    <h2>Registro de Acciones</h2>
+    <form id="registro-form">
+      <label>Nombre del jugador:</label>
+      <select id="jugador"></select>
+
+      <fieldset>
+        <legend>Posición obtenida:</legend>
+        <label><input type="radio" name="posicion" value="4"> 1er lugar (+4)</label>
+        <label><input type="radio" name="posicion" value="3"> 2do lugar (+3)</label>
+        <label><input type="radio" name="posicion" value="2"> 3er lugar (+2)</label>
+        <label><input type="radio" name="posicion" value="1"> 4to lugar (+1)</label>
+      </fieldset>
+
+      <label><input type="checkbox" value="1" class="extra"> Primera Sangre (+1)</label><br>
+      <label><input type="checkbox" value="1" class="extra"> Commander (+1)</label><br>
+      <label><input type="checkbox" value="1" class="extra"> Salvación (+1)</label><br>
+      <label><input type="checkbox" value="1" class="extra"> Aniquilación (+1)</label><br>
+      <label><input type="checkbox" value="-1" class="extra"> Eliminación (-1)</label><br>
+      <label><input type="checkbox" value="-1" class="extra"> Sin jugar (-1)</label><br>
+
+      <button type="submit">Registrar acciones</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Administración Manual</h2>
+
+    <h3>Modificar puntaje de un jugador</h3>
+    <label for="jugador-admin">Jugador:</label>
+    <select id="jugador-admin"></select><br><br>
+    <label for="mod-puntos">Puntos a modificar (+ / -):</label>
+    <input type="number" id="mod-puntos" value="0">
+    <button onclick="modificarPuntos()">Aplicar</button>
+
+    <h3>Resetear todos los jugadores</h3>
+    <button onclick="resetearTodo()" style="background-color:red; color:white; margin-top:1em;">
+      ⚠ Resetear todos los puntos y partidas
+    </button>
+    <button onclick="finalizarTorneo()" style="background-color:green; color:white; margin-top:1em;">
+         ✅ Finalizar Torneo y Guardar Marcador
+    </button>
+    <button onclick="borrarHistorialTorneos()" style="background-color:#b22222; color:white; margin-top:1em;">
+          🗑️ Borrar Historial de Torneos
+    </button>
+  </section>
+
+  <section>
+    <h2>Eliminar Jugadores Individualmente</h2>
+    <ul id="lista-jugadores"></ul>
+  </section>
+
+  <script src="control.js"></script>
+</body>
+</html>
